@@ -7,13 +7,22 @@
 <title>The Time Machine</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="app.css?v=9">
+<link rel="stylesheet" href="app.css?v=11">
+<link rel="stylesheet" href="extras.css?v=11">
 </head>
 <body>
-<div id="device">
-  <div id="app"></div>
-  <div id="toast" role="status" aria-live="polite"></div>
+<div id="stage">
+  <div id="device">
+    <div id="app"></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </div>
 </div>
-<script src="app.js?v=9"></script>
+<nav id="modes" aria-label="Switch view">
+  <button data-mode="app">App</button>
+  <button data-mode="watch">Watch</button>
+  <button data-mode="cms">CMS</button>
+</nav>
+<script src="app.js?v=11"></script>
+<script src="extras.js?v=11"></script>
 </body>
 </html>
