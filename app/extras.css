@@ -42,17 +42,17 @@
 .cms main { flex: 1; padding: 32px; display: flex; flex-direction: column; gap: 24px; overflow-y: auto; min-width: 0; }
 .cms .head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
 .cms .head h1 { font-family: var(--serif); font-size: 28px; font-weight: 600; margin: 0; }
-.cms .search { width: 300px; } .cms .search input { height: 44px; }
+.cms .head .field { flex: none; width: 300px; } .cms .search input { height: 44px; }
 .cms .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .cms .stat { background: var(--surface); border-radius: 14px; padding: 18px 20px; display: grid; gap: 6px; }
 .cms .stat span { color: var(--text-2); font-size: 13px; } .cms .stat b { font-family: var(--serif); font-size: 32px; font-weight: 600; }
-.cms .stat.alert { background: var(--blocked-bg); box-shadow: inset 0 0 0 1.5px var(--blocked); } .cms .stat.alert span { color: var(--blocked); font-weight: 600; }
+.cms .stat.stat-alert { background: var(--blocked-bg); box-shadow: inset 0 0 0 1.5px var(--blocked); } .cms .stat.stat-alert span { color: var(--blocked); font-weight: 600; }
 .cms table { width: 100%; border-collapse: collapse; }
 .cms th { text-align: left; font-size: 12px; font-weight: 600; color: var(--text-2); padding: 12px 16px; background: var(--surface); }
 .cms th:first-child { border-radius: 8px 0 0 8px; } .cms th:last-child { border-radius: 0 8px 8px 0; }
 .cms td { padding: 0 16px; height: 56px; border-bottom: 1px solid var(--border); }
-.cms tr.alert td { background: var(--blocked-bg); } .cms tr.alert td:first-child { box-shadow: inset 4px 0 0 var(--blocked); }
-.cms tr.you td { background: #FBF3E3; } .cms tr.you td:first-child { box-shadow: inset 4px 0 0 var(--copper); }
+.cms tr.row-alert td { background: var(--blocked-bg); } .cms tr.row-alert td:first-child { box-shadow: inset 4px 0 0 var(--blocked); }
+.cms tr.row-you td { background: #FBF3E3; } .cms tr.row-you td:first-child { box-shadow: inset 4px 0 0 var(--copper); }
 .cms td.strong { font-weight: 600; } .cms td.muted { color: var(--text-3); } .cms td.red { color: var(--blocked); font-weight: 600; }
 .pill { display: inline-flex; align-items: center; height: 24px; padding: 0 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
 .pill.In-trip { background: var(--surface-2); color: var(--copper); box-shadow: inset 0 0 0 1px var(--copper); }

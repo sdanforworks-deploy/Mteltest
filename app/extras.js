@@ -107,7 +107,7 @@ function drawCMS() {
     const q = CMS.q.trim().toLowerCase();
     const rows = all.filter(r => (CMS.filter === 'All' || r.s === CMS.filter || (CMS.filter === 'Alert' && isAlert(r))) && (!q || (r.n + r.id + r.d).toLowerCase().includes(q)));
     m.innerHTML = `<div class="head"><div><h1>Traveler monitor</h1><p class="sub">Today · updates live</p></div><div class="field search"><div class="search">${ICON.search}<input id="c-q" placeholder="Search traveler or booking ID" value="${esc(CMS.q)}" aria-label="Search"></div></div></div>
-      <div class="stats"><div class="stat"><span>Booked</span><b>${cnt('Booked') + 16}</b></div><div class="stat"><span>In-trip now</span><b>${cnt('In-trip') + cnt('Alert')}</b></div><div class="stat"><span>Returned today</span><b>${cnt('Returned') + 13}</b></div><div class="stat alert"><span>Needs attention</span><b>${all.filter(isAlert).length}</b></div></div>
+      <div class="stats"><div class="stat"><span>Booked</span><b>${cnt('Booked') + 16}</b></div><div class="stat"><span>In-trip now</span><b>${cnt('In-trip') + cnt('Alert')}</b></div><div class="stat"><span>Returned today</span><b>${cnt('Returned') + 13}</b></div><div class="stat stat-alert"><span>Needs attention</span><b>${all.filter(isAlert).length}</b></div></div>
       <div class="chips">${['All', 'Booked', 'Checked-in', 'In-trip', 'Returned', 'Alert'].map(f => `<button class="chip ${CMS.filter === f ? 'on' : ''}" data-act="c-filter" data-v="${f}">${f}</button>`).join('')}</div>
       <table><thead><tr><th>Traveler</th><th>Booking ID</th><th>Destination</th><th>Status</th><th>Return at</th><th>Alerts</th><th>Action</th></tr></thead><tbody id="c-body">${rowsHtml(rows)}</tbody></table>
       <p class="small">Showing ${rows.length} of ${all.length + 37} travelers · Alerts are sorted to the top${S.booking ? ' · Your demo booking is highlighted' : ''}</p>`;
@@ -124,7 +124,7 @@ function drawCMS() {
 }
 function rowsHtml(rows) {
   if (!rows.length) return `<tr><td colspan="7" class="empty">No travelers match this filter</td></tr>`;
-  return rows.map(r => { const a = isAlert(r); return `<tr class="${a ? 'alert' : ''} ${r.you ? 'you' : ''}"><td class="strong">${esc(r.n)}</td><td class="muted">${esc(r.id)}</td><td>${esc(r.d)}</td><td><span class="pill ${r.s}">${r.s}</span></td>
+  return rows.map(r => { const a = isAlert(r); return `<tr class="${a ? 'row-alert' : ''} ${r.you ? 'row-you' : ''}"><td class="strong">${esc(r.n)}</td><td class="muted">${esc(r.id)}</td><td>${esc(r.d)}</td><td><span class="pill ${r.s}">${r.s}</span></td>
     <td class="${a && r.r !== '—' ? 'red' : r.r === '—' ? 'muted' : ''}">${esc(r.r)}</td><td class="${a ? 'red' : 'muted'}">${esc(r.a)}</td>
     <td>${a ? `<button class="btn danger-fill small" data-act="c-recall" data-id="${r.id}"><span class="label">Recall</span></button>` : `<button class="link" data-act="toast" data-msg="Traveler details are not part of this prototype">View</button>`}</td></tr>`; }).join('');
 }
