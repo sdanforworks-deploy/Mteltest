@@ -171,7 +171,7 @@ const SCREENS = {
   },
   ticket() {
     const b = S.booking;
-    return `${status()}<div class="content"><h1 class="h1">Your ticket</h1>
+    return `${status()}${topbar('Your ticket')}<div class="content">
       <div class="ticket">${b ? `<div class="qr">${qrSvg(144)}</div><span class="small">Booking ${b.id}</span><div class="dash"></div>
         <div class="grid2"><div class="kv"><span>Check-in in</span><b class="big" id="checkin">…</b></div><div class="kv"><span>Office slot</span><b>${esc(b.slot)}</b></div></div>
         <div class="kv" style="width:100%"><span>Destination</span><b>${esc(b.place)} · ${esc(b.date)}</b></div>` : '<p class="small">No trips booked yet</p>'}</div>
@@ -203,7 +203,7 @@ function sheet(html, onClose) {
   closeSheet(); const scr = $('.screen.active'); if (!scr) return;
   const sc = document.createElement('div'); sc.className = 'scrim'; const sh = document.createElement('div'); sh.className = 'sheet';
   sh.innerHTML = `<span class="handle"></span>${html}`; sc.onclick = () => { closeSheet(); onClose && onClose(); };
-  scr.append(sc, sh);
+  scr.append(sc, sh); dragScroll(sh, false);
 }
 function closeSheet() { document.querySelectorAll('.scrim,.sheet').forEach(n => n.remove()); }
 function openEndedSheet() {
@@ -238,9 +238,28 @@ function render(name, dir) {
   cur = name; mount(name, el);
 }
 function go(name) { stack.push(cur); render(name, 'fwd'); }
-function back() { if (stack.length) render(stack.pop(), 'back'); }
+function back() { if (stack.length) render(stack.pop(), 'back'); else if (cur !== 'home') render('home', 'back'); }
+// Mouse drag-to-scroll for carousels (horizontal) and long pages / sheets (vertical). Touch and wheel keep working natively.
+function dragScroll(el, horiz) {
+  let st = null;
+  el.addEventListener('pointerdown', e => {
+    if (e.pointerType !== 'mouse' || e.button !== 0 || e._drag || e.target.closest('input,select,textarea')) return;
+    e._drag = true; st = { p: horiz ? e.clientX : e.clientY, s: horiz ? el.scrollLeft : el.scrollTop, moved: false, id: e.pointerId };
+  });
+  el.addEventListener('pointermove', e => {
+    if (!st || e.pointerId !== st.id) return; const d = (horiz ? e.clientX : e.clientY) - st.p;
+    if (!st.moved && Math.abs(d) > 5) { st.moved = true; el.setPointerCapture(e.pointerId); el.classList.add('dragging'); }
+    if (st.moved) { if (horiz) el.scrollLeft = st.s - d; else el.scrollTop = st.s - d; }
+  });
+  const end = () => { if (!st) return; if (st.moved) { el.classList.remove('dragging');
+      const block = ev => { ev.stopPropagation(); ev.preventDefault(); }; addEventListener('click', block, { capture: true, once: true }); setTimeout(() => removeEventListener('click', block, { capture: true }), 60); }
+    st = null; };
+  el.addEventListener('pointerup', end); el.addEventListener('pointercancel', end);
+}
+function enableDrag(root) { root.querySelectorAll('.carousel').forEach(c => dragScroll(c, true)); root.querySelectorAll('.content, .sheet').forEach(c => dragScroll(c, false)); }
 function rerender() { const el = $('.screen.active'); const y = el && $('.content', el) ? $('.content', el).scrollTop : 0; el.innerHTML = SCREENS[cur](); clearTimers(); mount(cur, el); if ($('.content', el)) $('.content', el).scrollTop = y; }
 function mount(name, el) {
+  enableDrag(el);
   if (name === 'pick') { drawSuggest(); }
   if (name === 'review') holdButton($('#hold', el));
   if (name === 'ticket' && S.booking) { const tick = () => { const ms = S.booking.at - Date.now(); const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60; const n = $('#checkin'); if (n) n.textContent = ms > 0 ? `${d}d ${pad(h)}h ${pad(m)}m` : 'Now'; }; tick(); every(tick, 1000); }
