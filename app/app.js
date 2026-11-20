@@ -182,7 +182,7 @@ const SCREENS = {
     const t = S.trip;
     return `${status('10:45')}<div class="content"><div><h1 class="h1">In-trip</h1><p class="sub">${esc(S.place)} · ${esc(dateText())}</p></div>
       <div class="count"><span class="small">Time left</span><span class="time" id="left">${t.total ? hms(t.left) : 'Open-ended'}</span><div class="bar"><i id="bar" style="width:${t.total ? (1 - t.left / t.total) * 100 : 0}%"></i></div><span class="tiny">${t.total ? 'Auto-return when the timer ends' : 'Return whenever you are ready'}</span></div>
-      <div style="display:flex;justify-content:space-between;align-items:center"><div><h2 class="h3" style="margin:0">Safety now</h2><p class="small" id="safety-now">${t.alert ? 'Storm nearby, stay close to the pick-up point' : 'No alerts near you'}</p></div><span id="badge-now">${badge(t.alert ? 'Caution' : 'Safe')}</span></div>
+      <div class="status-row"><div class="grow"><h2 class="h3" style="margin:0">Safety now</h2><p class="small" id="safety-now">${t.alert ? 'Storm nearby, stay close to the pick-up point' : 'No alerts near you'}</p></div><span id="badge-now">${badge(t.alert ? 'Caution' : 'Safe')}</span></div>
       <h2 class="h3">Pick-up point</h2><div class="map" style="background-image:url('${P.champ}')"></div>
       <div><b style="font-size:14px">Champ de Mars · 120 m</b><p class="small">Be here 5 min before return</p></div></div>
       <div class="actions">${btn('danger', 'Return now', 'return')}</div>`;

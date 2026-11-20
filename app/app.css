@@ -162,6 +162,9 @@ img { -webkit-user-drag: none; user-select: none; }
 @keyframes pop { from { transform: scale(.6); opacity: 0; } }
 .stars { display: flex; gap: 8px; justify-content: center; } .stars button { border: 0; background: none; padding: 2px; }
 .center { text-align: center; }
+.status-row { display: flex; align-items: flex-start; gap: 16px; }
+.status-row .grow { flex: 1; min-width: 0; display: grid; gap: 2px; }
+.status-row > span { flex: none; margin-top: 2px; }
 
 /* Floating menu bar */
 .menu { position: absolute; left: 16px; right: 16px; bottom: 24px; height: 72px; padding: 8px; border-radius: 36px; background: var(--surface); border: 1px solid var(--border); box-shadow: 0 6px 20px rgba(43,30,20,.12); display: grid; grid-template-columns: repeat(4, 1fr); }
