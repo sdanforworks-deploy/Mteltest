@@ -79,7 +79,16 @@ ul.bullets { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .suggest button { display: block; width: 100%; text-align: left; border: 0; background: none; padding: 12px; border-top: 1px solid var(--surface-2); }
 .suggest button:first-child { border-top: 0; } .suggest button:active { background: var(--surface-2); }
 .stepper { display: flex; align-items: center; justify-content: space-between; height: 44px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); padding: 0 7px; }
-.stepper button { width: 30px; height: 30px; border-radius: 15px; border: 0; background: var(--surface-2); font-size: 18px; line-height: 1; }
+.stepper button { width: 30px; height: 30px; padding: 0; border-radius: 15px; border: 0; background: var(--surface-2); color: var(--text); display: grid; place-items: center; }
+.stepper button svg { display: block; }
+.summary.hero { background: var(--copper); border-left: 0; padding: 16px 20px; }
+.summary.hero .tiny, .summary.hero .small { color: rgba(255,248,236,.8); }
+.summary.hero .place { color: var(--on-copper); font-size: 18px; }
+.map.plain { background: var(--surface-2); height: 64px; }
+.map.plain::after { width: 14px; height: 14px; margin: -7px; border-width: 3px; box-shadow: none; }
+.time-row { display: flex; gap: 8px; align-items: flex-end; }
+.time-row .field { flex: 0 0 176px; }
+.time-row .tiny { padding-bottom: 6px; }
 .stepper button:disabled { opacity: .4; }
 .stepper b { font-size: 16px; }
 .check { display: flex; gap: 10px; align-items: flex-start; border: 0; background: none; text-align: left; padding: 4px 0; font-size: 14px; }

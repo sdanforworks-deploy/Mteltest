@@ -36,6 +36,8 @@ const ICON = {
   close: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>',
   chev: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B5A48" stroke-width="2" stroke-linecap="round"><path d="M6 9l6 6 6-6"/></svg>',
   search: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#6B5A48" stroke-width="2" stroke-linecap="round"><circle cx="10" cy="10" r="6"/><path d="M14.5 14.5L20 20"/></svg>',
+  minus: '<svg width="12" height="12" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 6h8"/></svg>',
+  plus: '<svg width="12" height="12" viewBox="0 0 12 12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 6h8M6 2v8"/></svg>',
   check: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FFF8EC" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>',
   home: '<path d="M3 13L12 4l9 9M5.5 10.5V21h13V10.5"/>', plan: '<path d="M5 3h14M5 21h14M7 3c0 6 10 12 10 18M17 3c0 6-10 12-10 18"/>',
   trips: '<path d="M2 6h20v4a2 2 0 000 4v4H2v-4a2 2 0 000-4z M15 6v12"/>', profile: '<circle cx="12" cy="8" r="3.8"/><path d="M4.5 21c0-6.5 15-6.5 15 0"/>',
@@ -128,15 +130,15 @@ const SCREENS = {
         <div class="field ${e.day ? 'err' : ''}" style="flex:.85"><label for="f-day">Day</label><input id="f-day" inputmode="numeric" value="${S.day}" data-in="day"></div>
       </div>
       <p class="tiny" id="years-ago">${e.year || e.day ? `<span class="err-text">${esc(e.year || 'Day must be ' + e.day)}</span>` : yearsAgo()}</p>
-      <div class="row" style="align-items:center"><div class="field" style="flex:0 0 176px"><label for="f-time">Time</label><input id="f-time" type="time" value="${S.time}" data-in="time"></div><p class="tiny" style="margin-top:20px">Local time at<br>the destination</p></div>
+      <div class="time-row"><div class="field"><label for="f-time">Time</label><input id="f-time" type="time" value="${S.time}" data-in="time"></div><p class="tiny">Local time at the destination</p></div>
       <h2 class="h3">Where</h2>
       <div class="field ${e.place ? 'err' : ''}"><div class="search">${ICON.search}<input id="f-place" value="${esc(S.place)}" data-in="place" autocomplete="off" aria-label="Destination"></div></div>
       <div id="suggest"></div>
-      <div class="map" style="height:72px;background-image:url('${P.paris}')"></div>
+      <div class="map plain" aria-hidden="true"></div>
       <h2 class="h3">How long</h2>
       <div class="seg">${['Hours', 'Days', 'Open-ended'].map(v => `<button class="${S.unit === v ? 'on' : ''}" data-act="unit" data-v="${v}">${v}</button>`).join('')}</div>
-      ${S.unit === 'Open-ended' ? '<p class="small">No set return time. Extra cost applies.</p>' : `<div class="stepper"><button data-act="amt" data-d="-1" aria-label="Less" ${S.amount <= 1 ? 'disabled' : ''}>–</button><b>${S.amount} ${S.unit === 'Hours' ? 'h' : S.amount > 1 ? 'days' : 'day'}</b><button data-act="amt" data-d="1" aria-label="More" ${S.amount >= amtMax ? 'disabled' : ''}>+</button></div>`}
-      <div class="summary"><span class="tiny">You'll arrive in</span><span class="place" id="sum-place">${esc(S.place)}</span><span class="small" id="sum-detail">${esc(summary())}</span></div>
+      ${S.unit === 'Open-ended' ? '<p class="small">No set return time. Extra cost applies.</p>' : `<div class="stepper"><button data-act="amt" data-d="-1" aria-label="Less" ${S.amount <= 1 ? 'disabled' : ''}>${ICON.minus}</button><b>${S.amount} ${S.unit === 'Hours' ? 'h' : S.amount > 1 ? 'days' : 'day'}</b><button data-act="amt" data-d="1" aria-label="More" ${S.amount >= amtMax ? 'disabled' : ''}>${ICON.plus}</button></div>`}
+      <div class="summary hero"><span class="tiny">You'll arrive in</span><span class="place" id="sum-place">${esc(S.place)}</span><span class="small" id="sum-detail">${esc(summary())}</span></div>
     </div><div class="actions">${btn('primary', 'Check destination', 'check', Object.keys(e).length ? 'disabled' : '')}</div>`;
   },
   report() {
