@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1420" viewBox="0 0 1520 1420">
+  <defs>
+    <marker id="ag" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#9E9E9E"/>
+    </marker>
+    <marker id="ac" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#F28B6F"/>
+    </marker>
+  </defs>
+
+  <rect width="1520" height="1420" fill="#F7F5FC"/>
+
+  <!-- User story -->
+  <text x="40" y="52" font-family="Inter" font-size="28" font-weight="700" font-style="italic" fill="#1F1F1F">User story</text>
+  <g font-family="Inter" font-size="14" fill="#1F1F1F">
+    <text x="40" y="84">As a traveller who doesn't know much about history, I want to book a safe and fun trip</text>
+    <text x="40" y="104">to any time and place through a clear visual interface, so I can enjoy the trip</text>
+    <text x="40" y="124">without ending up in danger or booking the wrong time.</text>
+  </g>
+
+  <g transform="translate(0,150)">
+    <!-- Phase labels -->
+    <g font-family="Inter" font-size="12" font-weight="700" fill="#7A6FA0" letter-spacing="1">
+      <text x="40" y="20">1 · PLAN &amp; CHECK</text>
+      <text x="40" y="480">2 · BOOK &amp; DEPART</text>
+      <text x="155" y="770">3 · IN-TRIP &amp; RETURN</text>
+    </g>
+
+    <!-- ===== Connectors (gray) ===== -->
+    <g fill="none" stroke="#9E9E9E" stroke-width="1.5" marker-end="url(#ag)">
+      <path d="M185,200 H228"/>
+      <path d="M390,200 H443"/>
+      <path d="M575,200 H647"/>
+      <path d="M510,245 V303"/>
+      <path d="M310,175 V55 H700 V170"/>
+      <path d="M590,330 H700 V230"/>
+      <path d="M812,200 H848"/>
+      <path d="M1010,200 H1063"/>
+      <path d="M1195,200 H1253"/>
+      <path d="M1130,155 V112"/>
+      <path d="M1050,85 H760 V170"/>
+      <path d="M1130,245 V283"/>
+      <path d="M1195,330 H1340 V227"/>
+      <path d="M1425,200 H1470 V560 H1427"/>
+      <!-- row 2 -->
+      <path d="M1255,560 H1220"/>
+      <path d="M1020,560 H987"/>
+      <path d="M855,560 H782"/>
+      <path d="M620,560 H562"/>
+      <path d="M400,560 H342"/>
+      <path d="M180,560 H140 V880 H178"/>
+      <!-- row 3 -->
+      <path d="M340,880 H413"/>
+      <path d="M765,880 H838"/>
+      <path d="M480,925 V973"/>
+      <path d="M545,1020 H920 V907"/>
+      <path d="M1000,880 H1048"/>
+      <path d="M1210,880 H1263"/>
+      <path d="M260,995 V907"/>
+    </g>
+
+    <!-- ===== Connectors (coral: back / negative) ===== -->
+    <g fill="none" stroke="#F28B6F" stroke-width="1.5">
+      <path d="M1130,375 V420 H760 V232" marker-end="url(#ac)"/>
+      <path d="M920,515 V420"/>
+      <path d="M545,880 H633" marker-end="url(#ac)"/>
+      <path d="M700,835 V790 H260 V853" marker-end="url(#ac)"/>
+      <path d="M415,1020 H342" marker-end="url(#ac)"/>
+    </g>
+
+    <!-- ===== Data connections (dashed) ===== -->
+    <g fill="none" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="6 4">
+      <path d="M930,225 V296"/>
+      <path d="M700,585 V646"/>
+    </g>
+
+    <!-- ===== Start / End ===== -->
+    <g fill="#E0E0E0" stroke="#9E9E9E" stroke-width="1.5">
+      <rect x="35" y="176" width="150" height="48" rx="24"/>
+      <rect x="1265" y="856" width="150" height="48" rx="24"/>
+    </g>
+
+    <!-- ===== Process ===== -->
+    <g fill="#E5DBFF" stroke="#9B7BEF" stroke-width="1.5">
+      <rect x="230" y="175" width="160" height="50" rx="6"/>
+      <rect x="430" y="305" width="160" height="50" rx="6"/>
+      <rect x="850" y="175" width="160" height="50" rx="6"/>
+      <rect x="1050" y="60" width="160" height="50" rx="6"/>
+      <rect x="1255" y="175" width="170" height="50" rx="6"/>
+      <rect x="1255" y="535" width="170" height="50" rx="6"/>
+      <rect x="620" y="535" width="160" height="50" rx="6"/>
+      <rect x="400" y="535" width="160" height="50" rx="6"/>
+      <rect x="180" y="535" width="160" height="50" rx="6"/>
+      <rect x="180" y="855" width="160" height="50" rx="6"/>
+      <rect x="840" y="855" width="160" height="50" rx="6"/>
+      <rect x="1050" y="855" width="160" height="50" rx="6"/>
+      <rect x="180" y="995" width="160" height="50" rx="6"/>
+    </g>
+
+    <!-- ===== Decision ===== -->
+    <g fill="#D4F5D4" stroke="#5CC85C" stroke-width="1.5">
+      <polygon points="510,155 575,200 510,245 445,200"/>
+      <polygon points="1130,155 1195,200 1130,245 1065,200"/>
+      <polygon points="1130,285 1195,330 1130,375 1065,330"/>
+      <polygon points="920,515 985,560 920,605 855,560"/>
+      <polygon points="480,835 545,880 480,925 415,880"/>
+      <polygon points="700,835 765,880 700,925 635,880"/>
+      <polygon points="480,975 545,1020 480,1065 415,1020"/>
+    </g>
+
+    <!-- ===== Input ===== -->
+    <g fill="#CFE6FF" stroke="#4AA3F0" stroke-width="1.5">
+      <polygon points="657,172 815,172 803,228 645,228"/>
+      <polygon points="1032,532 1220,532 1208,588 1020,588"/>
+    </g>
+
+    <!-- ===== Data ===== -->
+    <g fill="#FFE9A8" stroke="#F2C744" stroke-width="1.5">
+      <path d="M875,310 V370 A55,12 0 0 0 985,370 V310"/>
+      <ellipse cx="930" cy="310" rx="55" ry="12"/>
+      <path d="M645,660 V720 A55,12 0 0 0 755,720 V660"/>
+      <ellipse cx="700" cy="660" rx="55" ry="12"/>
+    </g>
+
+    <!-- ===== Shape text ===== -->
+    <g font-family="Inter" font-size="12.5" fill="#1F1F1F" text-anchor="middle">
+      <text x="110" y="204">Open app</text>
+      <text x="310" y="196" font-weight="600">Home</text><text x="310" y="212">Featured + Assist</text>
+      <text x="510" y="196">Know where</text><text x="510" y="212">to go?</text>
+      <text x="510" y="326" font-weight="600">Assist</text><text x="510" y="342">pick your interests</text>
+      <text x="730" y="196">Pick time, place</text><text x="730" y="212">&amp; stay length</text>
+      <text x="930" y="196">Auto safety &amp;</text><text x="930" y="212">weather check</text>
+      <text x="930" y="340">History &amp;</text><text x="930" y="356">weather data</text>
+      <text x="1130" y="196">Safety</text><text x="1130" y="212">level?</text>
+      <text x="1130" y="81">Show reason +</text><text x="1130" y="97">safer options</text>
+      <text x="1130" y="326">Accept</text><text x="1130" y="342">the risk?</text>
+      <text x="1340" y="196" font-weight="600">Destination report</text><text x="1340" y="212">weather + what to wear</text>
+
+      <text x="1340" y="556" font-weight="600">Review trip</text><text x="1340" y="572">summary + price</text>
+      <text x="1120" y="556">Choose office slot</text><text x="1120" y="572">+ optional opt-in</text>
+      <text x="920" y="556">Hold to</text><text x="920" y="572">confirm?</text>
+      <text x="700" y="556" font-weight="600">Ticket</text><text x="700" y="572">QR + countdown</text>
+      <text x="700" y="690">Bookings</text><text x="700" y="706">(CMS)</text>
+      <text x="480" y="556" font-weight="600">Reminder</text><text x="480" y="572">30 min · phone + watch</text>
+      <text x="260" y="556" font-weight="600">Check in at office</text><text x="260" y="572">scan QR</text>
+
+      <text x="260" y="876" font-weight="600">In-trip</text><text x="260" y="892">time left + pick-up point</text>
+      <text x="480" y="876">Danger</text><text x="480" y="892">alert?</text>
+      <text x="700" y="876">Time</text><text x="700" y="892">up?</text>
+      <text x="920" y="876" font-weight="600">Return to</text><text x="920" y="892">present</text>
+      <text x="1130" y="876" font-weight="600">Returned</text><text x="1130" y="892">trip summary</text>
+      <text x="1340" y="884">End</text>
+      <text x="480" y="1016">Return</text><text x="480" y="1032">now?</text>
+      <text x="260" y="1016" font-weight="600">Move to</text><text x="260" y="1032">safe point</text>
+    </g>
+
+    <!-- ===== Branch labels ===== -->
+    <g font-family="Inter" font-size="11" font-weight="600" fill="#FFFFFF" text-anchor="middle">
+      <!-- green -->
+      <rect x="590" y="191" width="34" height="18" rx="3" fill="#5CC85C"/><text x="607" y="204">Yes</text>
+      <rect x="1206" y="191" width="38" height="18" rx="3" fill="#5CC85C"/><text x="1225" y="204">Safe</text>
+      <rect x="1245" y="321" width="34" height="18" rx="3" fill="#5CC85C"/><text x="1262" y="334">Yes</text>
+      <rect x="801" y="551" width="34" height="18" rx="3" fill="#5CC85C"/><text x="818" y="564">Yes</text>
+      <rect x="463" y="941" width="34" height="18" rx="3" fill="#5CC85C"/><text x="480" y="954">Yes</text>
+      <rect x="785" y="871" width="34" height="18" rx="3" fill="#5CC85C"/><text x="802" y="884">Yes</text>
+      <rect x="683" y="1011" width="34" height="18" rx="3" fill="#5CC85C"/><text x="700" y="1024">Yes</text>
+      <!-- coral -->
+      <rect x="478" y="263" width="64" height="18" rx="3" fill="#FF7B5C"/><text x="510" y="276">Not sure</text>
+      <rect x="1100" y="124" width="60" height="18" rx="3" fill="#FF7B5C"/><text x="1130" y="137">Blocked</text>
+      <rect x="1100" y="255" width="60" height="18" rx="3" fill="#F2A93B"/><text x="1130" y="268">Caution</text>
+      <rect x="880" y="411" width="108" height="18" rx="3" fill="#FF7B5C"/><text x="934" y="424">No · change trip</text>
+      <rect x="898" y="461" width="44" height="18" rx="3" fill="#FF7B5C"/><text x="920" y="474">Edit</text>
+      <rect x="573" y="871" width="32" height="18" rx="3" fill="#FF7B5C"/><text x="589" y="884">No</text>
+      <rect x="390" y="781" width="180" height="18" rx="3" fill="#FF7B5C"/><text x="480" y="794">No · reminders at 30 / 10 / 2 min</text>
+      <rect x="362" y="1011" width="32" height="18" rx="3" fill="#FF7B5C"/><text x="378" y="1024">No</text>
+      <!-- neutral -->
+      <rect x="440" y="46" width="130" height="18" rx="3" fill="#9E9E9E"/><text x="505" y="59">Tap a featured trip</text>
+      <rect x="600" y="321" width="96" height="18" rx="3" fill="#9E9E9E"/><text x="648" y="334">Pick suggestion</text>
+      <rect x="860" y="76" width="96" height="18" rx="3" fill="#9E9E9E"/><text x="908" y="89">Pick an option</text>
+    </g>
+
+    <!-- ===== Notes ===== -->
+    <g font-family="Inter" fill="#1F1F1F">
+      <rect x="40" y="270" width="190" height="96" fill="#E6E6E6"/>
+      <text x="52" y="292" font-size="11.5" font-weight="700">Design opportunity</text>
+      <text x="52" y="312" font-size="11">• Summary sentence always visible</text>
+      <text x="52" y="330" font-size="11">• BC/AD toggle + local time</text>
+      <text x="52" y="348" font-size="11">• No voice / free-text input</text>
+
+      <rect x="1250" y="620" width="200" height="96" fill="#E6E6E6"/>
+      <text x="1262" y="642" font-size="11.5" font-weight="700">Business &amp; trust</text>
+      <text x="1262" y="662" font-size="11">• "Featured" badge, clearly labelled</text>
+      <text x="1262" y="680" font-size="11">• Opt-in, never pre-ticked</text>
+      <text x="1262" y="698" font-size="11">• Perks: local guide, discount</text>
+
+      <rect x="1000" y="960" width="200" height="96" fill="#E6E6E6"/>
+      <text x="1012" y="982" font-size="11.5" font-weight="700">Watch opportunity</text>
+      <text x="1012" y="1002" font-size="11">• Time left at a glance</text>
+      <text x="1012" y="1020" font-size="11">• Danger alert + Return now</text>
+      <text x="1012" y="1038" font-size="11">• Phone stays out of sight</text>
+    </g>
+  </g>
+
+  <!-- ===== Legend ===== -->
+  <text x="40" y="1290" font-family="Inter" font-size="28" font-weight="700" font-style="italic" fill="#1F1F1F">Legend</text>
+  <g stroke-width="1.5">
+    <rect x="40" y="1320" width="130" height="44" rx="22" fill="#E0E0E0" stroke="#9E9E9E"/>
+    <polygon points="265,1312 320,1342 265,1372 210,1342" fill="#D4F5D4" stroke="#5CC85C"/>
+    <rect x="360" y="1320" width="130" height="44" rx="6" fill="#E5DBFF" stroke="#9B7BEF"/>
+    <path d="M530,1322 V1362 A45,10 0 0 0 620,1362 V1322" fill="#FFE9A8" stroke="#F2C744"/>
+    <ellipse cx="575" cy="1322" rx="45" ry="10" fill="#FFE9A8" stroke="#F2C744"/>
+    <polygon points="672,1320 800,1320 790,1364 662,1364" fill="#CFE6FF" stroke="#4AA3F0"/>
+    <rect x="840" y="1318" width="110" height="48" fill="#E6E6E6" stroke="none"/>
+    <path d="M990,1342 H1070" fill="none" stroke="#9E9E9E" stroke-dasharray="6 4"/>
+    <path d="M1110,1342 H1190" fill="none" stroke="#F28B6F" marker-end="url(#ac)"/>
+  </g>
+  <g font-family="Inter" font-size="12.5" fill="#1F1F1F" text-anchor="middle">
+    <text x="105" y="1346">Start / End</text>
+    <text x="265" y="1346">Decision</text>
+    <text x="425" y="1346">Process</text>
+    <text x="575" y="1350">Data</text>
+    <text x="731" y="1346">Input</text>
+    <text x="895" y="1346">Note</text>
+    <text x="1030" y="1390">Data link</text>
+    <text x="1150" y="1390">Back / negative</text>
+  </g>
+</svg>
