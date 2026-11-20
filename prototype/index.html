@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Time Machine · Prototype</title>
+<style>
+  :root { --ink:#2B1E14; --cream:#F6F0E4; --sand:#EDE3D1; --copper:#9C5B1F; --mute:#6B5A48; }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--sand); color: var(--ink); font-family: Inter, system-ui, sans-serif; }
+  header { height: 56px; display: flex; align-items: center; gap: 8px; padding: 0 16px; background: var(--ink); color: var(--cream); }
+  header b { font-weight: 600; margin-right: auto; font-size: 15px; }
+  header button { font: inherit; font-size: 14px; border: 1px solid #6B5A48; background: transparent; color: var(--cream); padding: 6px 14px; border-radius: 18px; cursor: pointer; }
+  header button.on { background: var(--copper); border-color: var(--copper); }
+  #stage { height: calc(100% - 56px - 36px); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  #wrap { position: relative; transform-origin: center center; }
+  #screen { position: relative; background-repeat: no-repeat; border-radius: 28px; overflow: hidden; box-shadow: 0 12px 40px rgba(43,30,20,.18); }
+  #screen.desk { border-radius: 8px; }
+  #screen.watch { border-radius: 40px; }
+  .hot { position: absolute; cursor: pointer; border-radius: 10px; }
+  .flash .hot { background: rgba(156,91,31,.25); outline: 2px solid rgba(156,91,31,.7); }
+  footer { height: 36px; display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--mute); }
+</style>
+</head>
+<body>
+<header>
+  <b>The Time Machine</b>
+  <button data-flow="booking">Booking flow</button>
+  <button data-flow="cms">CMS</button>
+  <button data-flow="watch">Watch</button>
+</header>
+<div id="stage"><div id="wrap"><div id="screen"></div></div></div>
+<footer id="hint">Tap the screen to see what you can click</footer>
+<script>
+// Images are exports of the Figma sections (40 px padding). scale = image px per Figma px.
+const IMG = { phone: { src: 'phone.png', s: 4096 / 4245 }, cms: { src: 'cms.png', s: 1 }, watch: { src: 'watch.png', s: 1 } };
+const S = {
+  '18:3':  ['phone', 37, 57, 393, 852, '1 Home'],
+  '18:78': ['phone', 510, 57, 393, 852, '2 Assist'],
+  '18:147':['phone', 983, 57, 393, 852, '3 Pick destination'],
+  '18:223':['phone', 1456, 57, 393, 852, '3b Open-ended stay'],
+  '18:328':['phone', 1929, 57, 393, 852, '4 Destination report'],
+  '18:366':['phone', 2402, 57, 393, 852, '4b Caution'],
+  '18:413':['phone', 2875, 57, 393, 852, '4c Blocked'],
+  '18:462':['phone', 3348, 57, 393, 852, '4d What to wear'],
+  '20:225':['phone', 37, 1049, 393, 852, '5 Review and book'],
+  '20:293':['phone', 510, 1049, 393, 852, '6 Ticket'],
+  '20:455':['phone', 983, 1049, 393, 852, '7 In-trip'],
+  '20:488':['phone', 1456, 1049, 393, 852, '7b Danger alert'],
+  '20:536':['phone', 1929, 1049, 393, 852, '7c Return reminder'],
+  '20:575':['phone', 2402, 1049, 393, 852, '8 Returned'],
+  '20:604':['watch', 473, 395, 198, 242, 'W0 Watch · Ticket'],
+  '20:738':['watch', 731, 395, 198, 242, 'W1 Watch · Return countdown'],
+  '20:746':['watch', 989, 395, 198, 242, 'W2 Watch · Danger alert'],
+  '23:565':['cms', 53, 104, 1440, 1024, 'CMS 1 Traveler monitor'],
+  '23:820':['cms', 1573, 104, 1440, 1024, 'CMS 2 Featured events'],
+};
+// [screen, x, y, w, h, timeoutMs, destination] — taken from the Figma prototype links
+const L = [["18:3",16,173,290,250,0,"18:328"],["18:3",32,522,160,52,0,"18:78"],["18:3",16,606,361,52,0,"18:147"],["18:78",0,44,60,56,0,"BACK"],["18:78",60,44,333,56,0,"18:147"],["18:147",0,44,60,56,0,"BACK"],["18:147",16,561,361,40,0,"18:223"],["18:147",16,776,361,52,0,"18:328"],["18:223",24,776,345,52,0,"18:147"],["18:328",0,44,60,56,0,"BACK"],["18:328",16,508,128,52,0,"18:462"],["18:328",130,747,133,17,0,"18:147"],["18:328",16,776,361,52,0,"20:225"],["18:366",16,349,361,64,0,"18:328"],["18:366",130,747,133,17,0,"18:147"],["18:413",16,349,361,64,0,"18:328"],["18:413",16,776,361,52,0,"18:147"],["18:462",345,70,40,40,0,"18:328"],["18:462",24,776,345,52,0,"18:328"],["20:225",0,44,60,56,0,"BACK"],["20:225",16,776,361,52,0,"20:293"],["20:293",16,100,361,354,0,"20:455"],["20:455",0,0,393,852,3000,"20:488"],["20:455",16,776,361,52,0,"20:575"],["20:488",24,712,345,52,0,"20:575"],["20:488",24,776,345,52,0,"20:536"],["20:536",16,776,361,52,0,"20:575"],["20:536",8,44,377,96,0,"20:455"],["20:575",16,776,361,52,0,"18:3"],["23:565",12,192,216,36,0,"23:820"],["23:820",12,72,216,36,0,"23:565"],["20:604",0,0,198,242,0,"20:738"],["20:738",0,0,198,242,0,"20:746"],["20:746",0,0,198,242,0,"20:604"]];
+const FLOW = { booking: '18:3', cms: '23:565', watch: '20:604' };
+const screenEl = document.getElementById('screen'), wrap = document.getElementById('wrap'), hint = document.getElementById('hint');
+let cur = null, timer = null; const hist = [];
+function fit() { const [, , , w, h] = S[cur]; const st = document.getElementById('stage'); const k = Math.min((st.clientWidth - 32) / w, (st.clientHeight - 32) / h, 1.2); wrap.style.transform = `scale(${k})`; }
+function show(id, push = true) {
+  if (timer) { clearTimeout(timer); timer = null; }
+  if (push && cur) hist.push(cur);
+  cur = id; const [img, x, y, w, h, name] = S[id]; const I = IMG[img];
+  screenEl.className = img === 'cms' ? 'desk' : img === 'watch' ? 'watch' : '';
+  Object.assign(screenEl.style, { width: w + 'px', height: h + 'px', backgroundImage: `url(${I.src})`, backgroundSize: `${(img === 'phone' ? 4245 : img === 'cms' ? 3451 : 1573)}px auto`, backgroundPosition: `-${40 + x}px -${40 + y}px` });
+  screenEl.innerHTML = '';
+  for (const [s, hx, hy, hw, hh, ms, d] of L) { if (s !== id) continue;
+    if (ms) { timer = setTimeout(() => cur === id && show(d), ms); continue; }
+    const a = document.createElement('div'); a.className = 'hot'; Object.assign(a.style, { left: hx + 'px', top: hy + 'px', width: hw + 'px', height: hh + 'px' });
+    a.onclick = e => { e.stopPropagation(); if (d === 'BACK') { if (hist.length) show(hist.pop(), false); } else show(d); };
+    screenEl.appendChild(a); }
+  hint.textContent = name + (id === '20:455' ? ' · a danger alert appears after 3 seconds' : '');
+  document.querySelectorAll('header button').forEach(b => b.classList.toggle('on', FLOW[b.dataset.flow] && S[cur][0] === S[FLOW[b.dataset.flow]][0]));
+  fit();
+}
+screenEl.addEventListener('click', () => { screenEl.classList.add('flash'); setTimeout(() => screenEl.classList.remove('flash'), 500); });
+document.querySelectorAll('header button').forEach(b => b.onclick = () => { hist.length = 0; show(FLOW[b.dataset.flow], false); });
+addEventListener('resize', fit);
+show('18:3', false);
+</script>
+</body>
+</html>
