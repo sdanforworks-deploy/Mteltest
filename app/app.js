@@ -144,12 +144,12 @@ const SCREENS = {
   report() {
     const sf = safety(); const w = weather(), wr = wear(); const lv = sf.level; S.lastLevel = lv;
     let mid = '';
-    if (lv === 'Safe') mid = `<h2 class="h3">Safety</h2>${badge('Safe')}<p class="small">${sf.body}</p><div class="divider"></div>`;
+    if (lv === 'Safe') mid = `<h2 class="h3">Safety</h2>${badge('Safe')}<p class="small">${sf.body}</p>`;
     else mid = `<div class="alert ${lv}">${badge(lv)}<b>${esc(sf.title)}</b><p>${esc(sf.body)}</p></div>` +
       (sf.alts.length ? `<h2 class="h3">${lv === 'Blocked' ? 'Try these instead' : 'Safer times nearby'}</h2>` + sf.alts.map((a, i) => `<button class="option" data-act="alt" data-i="${i}"><span class="t"><b>${a.t}</b><span>${a.s}</span></span>${badge(a.lv)}</button>`).join('') : '') +
       (lv === 'Caution' ? check(S.riskOk, 'I understand the risk and want to keep this time', 'risk') : `<p class="small muted">Blocked trips can't be booked</p>`);
     const info = lv === 'Blocked' ? '' : `<h2 class="h3">Weather</h2><div class="weather"><span class="temp">${w.t}</span><div><div class="small" style="color:var(--text)">${w.a}</div><div class="small">${w.b}</div></div></div>
-      <h2 class="h3">What to wear</h2><ul class="bullets">${wr.list.map(x => `<li>${esc(x)}</li>`).join('')}</ul><div>${btn('accent small', 'View more ›', 'wear')}</div>
+      <h2 class="h3">What to wear</h2><ul class="bullets">${wr.list.map(x => `<li>${esc(x)}</li>`).join('')}</ul><div>${btn('accent mid', 'View more ›', 'wear')}</div>
       <h2 class="h3">Don't bring</h2><ul class="bullets">${wr.dont.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
     const actions = lv === 'Blocked' ? btn('secondary', 'Change destination', 'back')
       : `<button class="link" data-act="back">Change destination</button>${btn('primary', 'Continue', 'go', `data-to="review" ${lv === 'Caution' && !S.riskOk ? 'disabled' : ''}`)}`;
